@@ -66,3 +66,48 @@ class HistoryRunDetail(BaseModel):
     created_at: str
     metrics: dict
     tickets: list[HistoryTicketRecord]
+
+
+class AnalyticsOverview(BaseModel):
+    total_runs: int
+    total_tickets: int
+    high_priority: int
+    approved: int
+    needs_review: int
+    new_count: int
+    in_review_count: int
+    resolved_count: int
+    high_priority_rate: float
+    approval_rate: float
+    needs_review_rate: float
+
+
+class AnalyticsRunRecord(BaseModel):
+    run_id: int
+    created_at: str
+    total_tickets: int
+    high_priority: int
+    approved: int
+    needs_review: int
+    new_count: int
+    in_review_count: int
+    resolved_count: int
+    high_priority_rate: float
+    approval_rate: float
+    needs_review_rate: float
+
+
+class AnalyticsTicketRecord(BaseModel):
+    run_id: int
+    run_created_at: str
+    ticket_id: str
+    original_text: str
+    category: Category
+    urgency: Urgency
+    sentiment: Literal["angry", "neutral", "positive"]
+    status: TicketStatus
+    assigned_team: Team
+    qa_status: QAStatus
+    is_high_priority: int
+    is_approved: int
+    is_needs_review: int

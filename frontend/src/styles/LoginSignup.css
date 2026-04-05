@@ -1,0 +1,164 @@
+.auth-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f8f9fa;
+  padding: 2rem;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.auth-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  border: 1px solid #e9ecef;
+}
+
+.auth-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.auth-header h1 {
+  color: #2c3e50;
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.auth-card h2 {
+  color: #34495e;
+  margin: 1rem 0 0.5rem 0;
+  font-size: 1.4rem;
+  text-align: center;
+  font-weight: 600;
+}
+
+.auth-subtitle {
+  color: #7f8c8d;
+  text-align: center;
+  margin: 0 0 1.5rem 0;
+  font-size: 0.95rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  color: #333;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #bdc3c7;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+.form-group input::placeholder {
+  color: #95a5a6;
+}
+
+.error-message {
+  background: #fdf2f2;
+  color: #e74c3c;
+  padding: 0.75rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  border-left: 3px solid #e74c3c;
+  font-size: 0.9rem;
+}
+
+.success-message {
+  background: #f0fdf4;
+  color: #27ae60;
+  padding: 0.75rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  border-left: 3px solid #27ae60;
+  font-size: 0.9rem;
+}
+
+.submit-button {
+  width: 100%;
+  padding: 0.875rem;
+  background: #3498db;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 0.5rem;
+}
+
+.submit-button:hover:not(:disabled) {
+  background: #2980b9;
+  transform: translateY(-1px);
+}
+
+.submit-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.auth-footer {
+  text-align: center;
+  margin-top: 1.5rem;
+  color: #666;
+}
+
+.auth-footer p {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.toggle-button {
+  background: none;
+  border: none;
+  color: #667eea;
+  cursor: pointer;
+  font-weight: 600;
+  text-decoration: underline;
+  padding: 0;
+  font-size: inherit;
+}
+
+.toggle-button:hover {
+  color: #764ba2;
+}
+
+@media (max-width: 480px) {
+  .auth-card {
+    padding: 1.5rem;
+  }
+
+  .auth-card h2 {
+    font-size: 1.4rem;
+  }
+
+  .auth-subtitle {
+    font-size: 0.9rem;
+  }
+}

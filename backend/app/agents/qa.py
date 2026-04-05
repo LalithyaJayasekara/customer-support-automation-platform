@@ -1,5 +1,6 @@
 import json
 import os
+import asyncio
 
 from app.config import settings
 
@@ -48,7 +49,15 @@ def _qa_agents_sdk_check(draft_reply: str) -> dict | None:
             "Output strict JSON only."
         )
 
-        result = Runner.run_sync(agent, input=prompt)
+        # Add timeout to prevent hanging on API issues
+        try:
+            result = asyncio.run(asyncio.wait_for(
+                asyncio.to_thread(Runner.run_sync, agent, input=prompt),
+                timeout=8.0  # 8 second timeout
+            ))
+        except asyncio.TimeoutError:
+            raise Exception("AI QA timed out")
+
         final_output = getattr(result, "final_output", None)
         output_text = final_output if isinstance(final_output, str) else str(final_output or "")
         parsed = json.loads(output_text)
@@ -72,7 +81,9 @@ def _qa_agents_sdk_check(draft_reply: str) -> dict | None:
             "checks": normalized_checks,
             "reasoning": str(parsed.get("reasoning", "")).strip(),
         }
-    except Exception:
+    except Exception as e:
+        # Log the error but don't fail - fall back to rule-based
+        print(f"AI QA failed, falling back to rules: {e}")
         return None
 
 

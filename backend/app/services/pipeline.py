@@ -21,7 +21,7 @@ def run_ticket_pipeline(ticket: TicketInput) -> TicketResult:
     classification = classify_ticket(ticket.text)
     trace.append(TraceStep(agent="ClassifierAgent", output=classification))
 
-    routing = route_ticket(classification["category"])
+    routing = route_ticket(classification["category"], ticket.text)
     trace.append(TraceStep(agent="RouterAgent", output=routing))
 
     reply = generate_reply(

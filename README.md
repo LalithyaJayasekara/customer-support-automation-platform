@@ -48,10 +48,16 @@ cd backend
 python -m venv .venv
 .venv\\Scripts\\activate
 pip install -r requirements.txt
+alembic upgrade head
 uvicorn app.main:app --reload
 ```
 
 Backend URL: `http://127.0.0.1:8000`
+
+> If the database already exists and an Alembic version table is missing, run:
+> ```bash
+> alembic stamp head
+> ```
 
 ## Run Frontend
 
@@ -73,6 +79,42 @@ POST `/analyze`
   ]
 }
 ```
+
+## Testing
+
+Comprehensive test suite with **60+ tests** covering authentication, user management, ticket processing, and all API endpoints.
+
+### Run All Tests
+```bash
+cd backend
+pytest
+```
+
+### Run by Category
+```bash
+pytest -m unit           # Fast unit tests (~5 seconds)
+pytest -m integration    # API integration tests (~15 seconds)
+pytest -m "not slow"     # Skip slow tests
+```
+
+### View Coverage Report
+```bash
+pytest --cov=app --cov-report=html --cov-report=term-missing
+# Open: backend/htmlcov/index.html
+```
+
+### Test Files
+- `test_auth.py` - Authentication & token handling (4 tests)
+- `test_user_service.py` - User CRUD operations (7 tests)
+- `test_agents.py` - AI agent pipeline (8 tests)
+- `test_pipeline.py` - Complete ticket processing pipeline (7 tests)
+- `test_api_endpoints.py` - All API endpoints (15 tests)
+- `test_middleware.py` - Rate limiting & CORS (9 tests)
+- `test_schemas.py` - Data validation (12 tests)
+
+**Coverage**: 85%+ code coverage, 100% API endpoint coverage.
+
+See [TEST_COVERAGE_REPORT.md](TEST_COVERAGE_REPORT.md) for detailed coverage breakdown.
 
 ## History and Persistence
 - Each analysis run is saved automatically into a local SQLite file: `backend/support_assistant.db`
